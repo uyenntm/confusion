@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 
-
 class Comment extends Component {
   constructor(props) {
     super(props);
@@ -15,11 +14,11 @@ class Comment extends Component {
       return months[d.getMonth()] + " "+ d.getDay()+", "+d.getFullYear();
     }
   renderComment(dish) {
-    console.log(dish.comments);
+    //console.log(dish.comments);
     if (dish != null) {
-        console.log("Comment renderComment");
+        //console.log("Comment renderComment");
       if (dish.comments != null) {
-        console.log("Comment renderComment1");
+        //console.log("Comment renderComment1");
         const comments = dish.comments.map(comment => {
           return (
             <div key={comment.id}>
@@ -33,10 +32,9 @@ class Comment extends Component {
     } else return <div></div>;
   }
   render() {
-    console.log("Comment render");
-    console.log(this.props.selectedDish);
+    
     if (this.props.selectedDish != null){
-        console.log("Comment render1");
+        //console.log("Comment render1");
         return (
           
           <div className="col-12 col-md-5 m-1">
