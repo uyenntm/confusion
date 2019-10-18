@@ -8,6 +8,7 @@ import {
   CardTitle
 } from "reactstrap";
 import DishDetail from "./DishDetailComponent";
+import Comment from "./CommentComponent";
 
 class Menu extends Component {
   constructor(props) {
@@ -58,10 +59,8 @@ class Menu extends Component {
       <div className="container">
         <div className="row">{menu}</div>
         <div className="row">
-          
           <DishDetail selectedDish={this.state.selectedDish}></DishDetail>
-            
-         
+          <Comment selectedDish={this.state.selectedDish}></Comment>
         </div>
       </div>
     );
