@@ -7,14 +7,9 @@ import {
   CardTitle
 } from "reactstrap";
 
-class DishDetail extends Component {
-  componentDidMount(){
-    console.log('DishedDetail componentDidMount');
-  }
-  componentDidUpdate(){
-    console.log("DishedDetail componentDidUpdate")
-  }
-  renderDish(dish){
+
+  
+  function RenderDish(dish){
       return ( <Card>
         <CardImg
           top
@@ -27,15 +22,15 @@ class DishDetail extends Component {
         </CardBody>
       </Card>);
   }
-  render() {
-    if (this.props.selectedDish != null)
+  function DishDetail(props) {
+    if (props.selectedDish != null)
       return (
         <div className="col-12 col-md-5 m-1">
-          {this.renderDish(this.props.selectedDish)}
+          {RenderDish(props.selectedDish)}
         </div>
       );
     else return <div></div>;
   }
-}
+
 
 export default DishDetail;
