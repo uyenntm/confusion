@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardImg, CardText, CardBody,
   CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import CommentForm from "./CommentForm";
 
 function formatDate(val){
   let d = new Date(val);
@@ -24,7 +24,8 @@ console.log("comment:",comments);
         </div>
       );
     });
-    return <div>{commentList}</div>;
+    return <div>{commentList}<CommentForm />
+    </div>;
   } else return <div></div>;
 
 }
@@ -66,6 +67,7 @@ console.log("comment:",comments);
                     <div className="col-12 col-md-5 m-1">
                         <h2>Comments</h2>
                         <RenderComments comments={props.comments} />
+                        
                     </div>
                 </div>
                 </div>

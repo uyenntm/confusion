@@ -1,5 +1,6 @@
 import React from "react";
 
+
   function formatDate(val){
       let d = new Date(val);
       //console.log(d);
@@ -33,6 +34,7 @@ import React from "react";
           <div className="col-12 col-md-5 m-1">
           <h2>Comments</h2>
             {renderComment(props.selectedDish)}
+            
           </div>
         );
     }
