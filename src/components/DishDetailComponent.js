@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody,
   CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from "./CommentForm";
+//import {addComment} from "../redux/ActionCreators";
 
 function formatDate(val){
   let d = new Date(val);
@@ -10,7 +11,7 @@ function formatDate(val){
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return months[d.getMonth()] + " "+ d.getDay()+", "+d.getFullYear();
 }
-function RenderComments({comments}) {
+function RenderComments({comments, addComment,dishId}) {
 console.log("comment:",comments);
  //return <div></div>;
     //console.log("Comment renderComment");
@@ -24,7 +25,8 @@ console.log("comment:",comments);
         </div>
       );
     });
-    return <div>{commentList}<CommentForm />
+    return <div>{commentList}
+    <CommentForm  dishId={dishId} addComment={addComment}/>
     </div>;
   } else return <div></div>;
 
@@ -66,7 +68,10 @@ console.log("comment:",comments);
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         <h2>Comments</h2>
-                        <RenderComments comments={props.comments} />
+                        <RenderComments comments={props.comments} 
+                          addComment={props.addComment}
+                          dishId={props.dish.id}
+                        />
                         
                     </div>
                 </div>
