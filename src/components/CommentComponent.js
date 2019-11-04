@@ -1,6 +1,5 @@
 import React from "react";
 
-
   function formatDate(val){
       let d = new Date(val);
       //console.log(d);

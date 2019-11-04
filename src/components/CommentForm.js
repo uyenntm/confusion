@@ -3,6 +3,7 @@ import { Control, LocalForm, Errors } from "react-redux-form";
 import { Button, Modal, ModalHeader, ModalBody, Row, Label } from "reactstrap";
 //import {addComment} from "../redux/ActionCreators";
 
+
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
 const minLength = len => val => val && val.length >= len;
@@ -21,6 +22,7 @@ class CommentForm extends Component {
     //alert("Current state is: " + JSON.stringify(values));
     this.toggleModal();
     this.props.addComment(this.props.dishId, values.rating,values.author,values.comment);
+    //this.props.resetFeedbackForm();
     //event.preventDefault();
   }
   toggleModal() {
@@ -39,7 +41,7 @@ class CommentForm extends Component {
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader>Summit Comment</ModalHeader>
           <ModalBody>
-            <LocalForm
+            <LocalForm 
               className="p-3"
               onSubmit={value => this.handleSubmit(value)}
             >
