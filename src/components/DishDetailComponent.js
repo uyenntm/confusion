@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody,
   CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from "./CommentForm";
+import { Loading } from './LoadingComponent';
 //import {addComment} from "../redux/ActionCreators";
 
 function formatDate(val){
@@ -13,8 +14,6 @@ function formatDate(val){
 }
 function RenderComments({comments, addComment,dishId}) {
 console.log("comment:",comments);
- //return <div></div>;
-    //console.log("Comment renderComment");
   if (comments != null) {
     //console.log("Comment renderComment1");
     const commentList =comments.map(comment => {
@@ -46,10 +45,26 @@ console.log("comment:",comments);
         </CardBody>
       </Card>);
   }
-  function DishDetail(props) {
-    console.log("dishDetail:", props);
-
-    if (props != null)
+  const  DishDetail=(props)=> {
+   if(props.isLoading){
+     return(
+       <div className="container">
+         <div className="row">
+           <Loading></Loading>
+         </div>
+       </div>
+     );
+   }
+   else if(props.errMess){
+    return(
+      <div className="container">
+        <div className="row">
+          <h4>{props.errMess}</h4>
+        </div>
+      </div>
+    )
+   }
+   else if (props != null)
       return (
         <div className="container">
                 <div className="row">
