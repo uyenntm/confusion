@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CommentForm from "./CommentForm";
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
-//import {addComment} from "../redux/ActionCreators";
+//import {postComment} from "../redux/ActionCreators";
 
 function formatDate(val){
   let d = new Date(val);
@@ -13,7 +13,7 @@ function formatDate(val){
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return months[d.getMonth()] + " "+ d.getDay()+", "+d.getFullYear();
 }
-function RenderComments({comments, addComment,dishId}) {
+function RenderComments({comments, postComment,dishId}) {
 console.log("comment:",comments);
   if (comments != null) {
     //console.log("Comment renderComment1");
@@ -26,7 +26,7 @@ console.log("comment:",comments);
       );
     });
     return <div>{commentList}
-    <CommentForm  dishId={dishId} addComment={addComment}/>
+    <CommentForm  dishId={dishId} postComment={postComment}/>
     </div>;
   } else return <div></div>;
 
@@ -85,7 +85,7 @@ console.log("comment:",comments);
                     <div className="col-12 col-md-5 m-1">
                         <h2>Comments</h2>
                         <RenderComments comments={props.comments} 
-                          addComment={props.addComment}
+                          postComment={props.postComment}
                           dishId={props.dish.id}
                         />
                         
