@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import CommentForm from "./CommentForm";
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 //import {postComment} from "../redux/ActionCreators";
 
 function formatDate(val){
@@ -17,16 +18,19 @@ function RenderComments({comments, postComment,dishId}) {
 console.log("comment:",comments);
   if (comments != null) {
     //console.log("Comment renderComment1");
-    const commentList =comments.map(comment => {
+  
+    return <div>
+    <Stagger in>
+    {comments.map(comment => {
       return (
-        <div key={comment.id}>
+        <Fade in key={comment.id}>
           <p>{comment.comment}</p>
           <p>-- {comment.author}, {formatDate(comment.date)}</p>
-        </div>
+        </Fade>
       );
-    });
-    return <div>{commentList}
+    })}
     <CommentForm  dishId={dishId} postComment={postComment}/>
+    </Stagger>
     </div>;
   } else return <div></div>;
 
@@ -34,7 +38,9 @@ console.log("comment:",comments);
   function RenderDish({dish}){
     console.log("RenderDish:", dish);
     console.log("RenderDish name:", dish.name);
-      return ( <Card>
+      return ( 
+        <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
+      <Card>
         <CardImg
           top
           src={baseUrl+dish.image}
@@ -44,7 +50,8 @@ console.log("comment:",comments);
           <CardTitle>{dish.name}</CardTitle>
           <CardText>{dish.description}</CardText>
         </CardBody>
-      </Card>);
+      </Card>
+      </FadeTransform>);
   }
   const  DishDetail=(props)=> {
    if(props.isLoading){
