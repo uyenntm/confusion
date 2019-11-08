@@ -15,7 +15,10 @@ import {
   postComment,
   fetchDishes,
   fetchComments,
-  fetchPromos
+  fetchPromos,
+  fetchLeaders,
+  fetchFeedbacks,
+  postFeedback
 } from "../redux/ActionCreators";
 import { connect } from "react-redux";
 import { actions } from "react-redux-form";
@@ -26,13 +29,16 @@ const mapStateToProps = state => {
     dishes: state.dishes,
     comments: state.comments,
     promotions: state.promotions,
-    leaders: state.leaders
+    leaders: state.leaders,
+    feedbacks: state.feedbacks
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   postComment: (dishId, rating, author, comment) =>
     dispatch(postComment(dishId, rating, author, comment)),
+  postFeedback: (firstname,lastname,telnum,email,agree,contactType,message) =>
+    dispatch(postFeedback(firstname,lastname,telnum,email,agree,contactType,message)),
   fetchDishes: () => {
     dispatch(fetchDishes());
   },
@@ -41,6 +47,12 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchPromos: () => {
     dispatch(fetchPromos());
+  },
+  fetchLeaders: () => {
+    dispatch(fetchLeaders());
+  },
+  fetchFeedbacks: () => {
+    dispatch(fetchFeedbacks());
   },
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
@@ -63,11 +75,15 @@ class Main extends Component {
     this.props.fetchDishes();
     this.props.fetchComments();
     this.props.fetchPromos();
+    this.props.fetchLeaders();
+    this.props.fetchFeedbacks();
   }
   onDishSelect(dishId) {
     this.setState({ selectedDish: dishId });
   }
   render() {
+    //console.log('leader Main Component:', this.props.leaders);
+
     const HomePage = () => {
       return (
         <Home
@@ -79,7 +95,11 @@ class Main extends Component {
           }
           promoLoading={this.props.promotions.isLoading}
           promosErrMess={this.props.promotions.errMess}
-          leader={this.props.leaders.filter(leader => leader.featured)[0]}
+          leader={
+            this.props.leaders.leaders.filter(leader => leader.featured)[0]
+          }
+          leadersLoading={this.props.leaders.isLoading}
+          leadersErrMess={this.props.leaders.errMess}
         />
       );
     };
@@ -128,7 +148,11 @@ class Main extends Component {
                 exact
                 path="/contactus"
                 component={() => (
-                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                  <Contact
+                    resetFeedbackForm={this.props.resetFeedbackForm}
+                    feedbacks={this.props.feedbacks}
+                    postFeedback={this.props.postFeedback}
+                  />
                 )}
               />
               } />

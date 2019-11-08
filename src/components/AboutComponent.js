@@ -8,42 +8,34 @@ import {
   Media
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Loading } from './LoadingComponent';
 
-function RenderLeader({ leader }) {
-  if (leader != null) {
-    
-      return (
-        <Media key={leader.id} className="p-4">
-          <Media className="pr-5" left  href="#">
-            <Media
-              object
-              src={leader.image}
-              alt={leader.name}
-            />
-          </Media>
-          <Media body>
-            <Media heading>{leader.name}</Media>
-            <Media >{leader.abbr}
-            </Media>
-            <Media>{leader.description}</Media>
-           
-          </Media>
+function RenderLeader({ leader, isLoading, errMess }) {
+  if (isLoading) {
+    return <Loading></Loading>;
+  } else if (errMess) {
+    return <h4>{errMess}</h4>;
+  } else {
+    return (
+      <Media key={leader.id} className="p-4">
+        <Media className="pr-5" left href="#">
+          <Media object src={leader.image} alt={leader.name} />
         </Media>
-      );
-    }
-    
-   else {
-    return <div></div>;
+        <Media body>
+          <Media heading>{leader.name}</Media>
+          <Media>{leader.abbr}</Media>
+          <Media>{leader.description}</Media>
+        </Media>
+      </Media>
+    );
   }
 }
 function About(props) {
-    const leaders = props.leaders.map((leader) => {
-        return (          
-                <RenderLeader key={leader.id} leader = {leader} />        
-        );
-                    
-    });
-    console.log(leaders);
+  console.log("About props:", props);
+  const leaders = props.leaders.map(leader => {
+    return <RenderLeader key={leader.id} leader={leader} />;
+  });
+  //console.log(leaders);
   return (
     <div className="container">
       <div className="row">
@@ -120,9 +112,7 @@ function About(props) {
           <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <Media list>
-            {leaders}
-          </Media>
+          <Media list>{leaders}</Media>
         </div>
       </div>
     </div>
